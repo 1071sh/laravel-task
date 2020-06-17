@@ -49,8 +49,8 @@
                 <div class="col-sm-9">
                     <p>登録したメールアドレスにメールマガジンをお送りしてもよろしいですか？</p>
                     <div class="form-check">
-                        <input type="checkbox" class="form-check-input" value="check-mail" id="defaultCheck1" checked>
-                        <label class="form-check-label" for="defaultCheck1">送信を許可します</label>
+                        <input type="checkbox" class="form-check-input" value="1" id="check-mail" checked>
+                        <label class="form-check-label" for="check-mail">送信を許可します</label>
                     </div>
                 </div>
             </div>
