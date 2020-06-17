@@ -11,6 +11,7 @@ class DatabaseSeeder extends Seeder
      */
     public function run()
     {
-        // $this->call(UsersTableSeeder::class);
+        // DatabaseSeeder.phpで使用するSeederファイルを指定する
+        $this->call(AgesTableSeeder::class);
     }
 }
