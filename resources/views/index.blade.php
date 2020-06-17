@@ -27,14 +27,11 @@
             <div class="form-group row align-items-center">
                 <label for="" class="col-sm-3 col-form-label">年代 <span class="text-danger">※</span></label>
                 <div class="col-sm-9">
-                    <select class="form-control my-1" id="">
+                    <select class="form-control my-1">
                         <option selected>選択してください</option>
-                        <option value="1">10代以下</option>
-                        <option value="2">20代</option>
-                        <option value="3">30代</option>
-                        <option value="4">40代</option>
-                        <option value="5">50代</option>
-                        <option value="6">60代以上</option>
+                        @foreach ($items as $item)
+                        <option value="{{ $item->sort }}">{{ $item->age }}</option>
+                        @endforeach
                     </select>
                 </div>
             </div>
