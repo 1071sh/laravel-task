@@ -11,4 +11,11 @@
 |
 */
 
+//入力ページ
 Route::get('/', 'FrontController@index')->name('index');
+
+//確認ページ
+Route::post('/confirm', 'FrontController@confirm')->name('confirm');
+
+// //確認ページ
+Route::post('/thanks', 'FrontController@thanks')->name('thanks');

@@ -15,7 +15,7 @@ class CreateAnswersTable extends Migration
     {
         Schema::create('answers', function (Blueprint $table) {
             $table->bigIncrements('id');                     // id
-            $table->string('fullname', 200);                 // 氏名
+            $table->string('name', 200);                     // 氏名
             $table->unsignedTinyInteger('gender');           // 性別: 男性:1 女性:2
             $table->integer('age_id');                       // agesのidが入る
             $table->string('email', 255);                    // メールアドレス
