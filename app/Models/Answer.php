@@ -3,7 +3,7 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
-use Illuminate\Support\Facades\DB;         // DBファサードをuse
+use Illuminate\Support\Facades\DB;          // DBファサードをuse
 
 class Answer extends Model
 {

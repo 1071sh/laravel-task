@@ -24,10 +24,10 @@ class ContactRequest extends FormRequest
     public function rules()
     {
         return [
-            'name'        => 'required',
-            'age'         => 'not_in: 0',
-            'email'       => 'required|email',
-            'feedback'    => 'max:10000',
+            'name'            => 'required',
+            'age_id'          => 'not_in: 0',
+            'email'           => 'required|email',
+            'feedback_text'   => 'max:10000',
         ];
     }
 
@@ -39,10 +39,10 @@ class ContactRequest extends FormRequest
     public function messages()
     {
         return [
-            'name.required'  => '名前は必ず入力して下さい',
-            'age.not_in'     => 'この項目は必須です',
-            'email.required' => 'メールは必ず入力して下さい',
-            'feedback.max'   => '10,000文字以内でお願いします'
+            'name.required'      => '名前は必ず入力して下さい',
+            'age_id.not_in'      => 'この項目は必須です',
+            'email.required'     => 'メールは必ず入力して下さい',
+            'feedback_text.max'  => '10,000文字以内でお願いします'
         ];
     }
 }
