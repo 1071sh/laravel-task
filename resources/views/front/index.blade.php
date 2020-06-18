@@ -33,16 +33,9 @@
         <div class="col-sm-9">
             <select class="form-control my-1　@error('age') is-invalid @enderror" name="age">
                 <option value="0" selected>選択してください</option>
-                @foreach ($items as $item)
-                <option value="{{ $item->sort }}" @if(old('age')=='{{ $item->sort }}' ) selected="selected" @endif>{{ $item->age }}</option>
-
-
+                @foreach($items as $item => $name)
+                <option value="{{ $name->sort }}" @if(old('age')==$name->sort) selected @endif>{{ $name->age }}</option>
                 @endforeach
-
-                {{-- 
-                <option value="{{ $item->sort }}" @if(old('age')=='{{ $item->sort }}' ) selected="selected" @endif>{{ $item->age }}</option>
-                <option value="2" @if(old('id')=='2' ) selected @endif>2</option>
-                <option value="3" @if(old('id')=='3' ) selected @endif>3</option> --}}
             </select>
             @if ($errors->has('age'))
             <p class="text-danger">{{ $errors->first('age') }}</p>
