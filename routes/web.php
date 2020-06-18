@@ -11,11 +11,15 @@
 |
 */
 
-//入力ページ
+// 入力ページ
 Route::get('/', 'FrontController@index')->name('index');
 
-//確認ページ
+// 確認ページ
 Route::post('/confirm', 'FrontController@confirm')->name('confirm');
 
-// //確認ページ
+// 送信
 Route::post('/thanks', 'FrontController@thanks')->name('thanks');
+
+// 認証
+Auth::routes();
+Route::get('/system', 'HomeController@index')->name('home');
