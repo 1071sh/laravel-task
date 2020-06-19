@@ -22,4 +22,12 @@ Route::post('/thanks', 'FrontController@thanks')->name('thanks');
 
 // 認証
 Auth::routes();
-Route::get('/system', 'HomeController@index')->name('home');
+// Route::get('/system', 'HomeController@index');
+Route::get('/system', 'HomeController@index');
+
+
+// ログイン状態のみアクセス可能
+Route::group(['middleware' => 'auth'], function () {
+    // ユーザ関連
+    Route::get('/system/answer/index', 'AnswerController@index')->name('answer_index');
+});
