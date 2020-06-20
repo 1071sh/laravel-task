@@ -27,7 +27,6 @@ class AnswerController extends Controller
     {
         $answers = Answer::find($id);
         $answers->delete();
-        // Answer::find($request->id)->delete();
-        return redirect('system/answer/index');
+        return redirect('system/answer/index')->with('flash_message', '削除しました');
     }
 }

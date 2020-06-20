@@ -48,7 +48,6 @@
                     </div>
                 </div>
             </div> {{-- input --}}
-
             <div class="check-block col-sm-4">
                 <fieldset class="form-group mb-5">
                     <div class="row">
@@ -88,6 +87,13 @@
         </div>
     </form>
 </div>
+
+<!-- フラッシュメッセージ -->
+@if (session('flash_message'))
+<div class="flash_message alert alert-primary text-center" role="alert">
+    {{ session('flash_message') }}
+</div>
+@endif
 
 <button type="button" class="btn btn-danger">選択したアンケートを削除</button>
 <div class="">
