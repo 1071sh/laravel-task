@@ -8,8 +8,8 @@
     <title>@yield('title')</title>
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
     <link href="{{ asset('css/style.css') }}" rel="stylesheet">
-    <script src="{{ asset('js/app.js') }}"></script>
     <link href="https://use.fontawesome.com/releases/v5.6.1/css/all.css" rel="stylesheet">
+    @yield('styles')
 </head>
 <body>
     <main class="py-5">
@@ -17,5 +17,9 @@
             @yield('content')
         </div>
     </main>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+    <script src="{{ asset('js/app.js') }}"></script>
+    <script src="{{ asset('js/main.js') }}"></script>
+    @yield('scripts')
 </body>
 </html>

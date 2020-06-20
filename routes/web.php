@@ -22,12 +22,20 @@ Route::post('/thanks', 'FrontController@thanks')->name('thanks');
 
 // 認証
 Auth::routes();
-// Route::get('/system', 'HomeController@index');
 Route::get('/system', 'HomeController@index');
 
 
 // ログイン状態のみアクセス可能
 Route::group(['middleware' => 'auth'], function () {
     // ユーザ関連
-    Route::get('/system/answer/index', 'AnswerController@index')->name('answer_index');
+    Route::get('/system/answer/index', 'AnswerController@index');
+
+    // 詳細画面
+    Route::get('/system/answer/index/{id}', 'AnswerController@show');
+
+    // 削除機能
+    Route::post('/system/answer/index/{id}', 'AnswerController@delete');
+
+    //検索機能
+    // Route::get('paginate', 'SearchController@index')->name('search.index');s
 });

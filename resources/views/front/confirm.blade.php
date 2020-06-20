@@ -7,23 +7,23 @@
     <form method="POST" action="{{action('FrontController@thanks')}}">
         @csrf
         <table class="table">
-            <tr>
-                <th style="width:200px">氏名</th>
-                <td>{{ $inputs["name"] }}</td>
+            <tr class="d-flex">
+                <th class="col-2">氏名</th>
+                <td class="col-10">{{ $inputs["name"] }}</td>
                 <input type="hidden" name="name" value="{{ $inputs['name'] }}">
             </tr>
-            <tr>
-                <th style="width:200px">性別</th>
-                <td>@if($inputs["gender"] === '1')
+            <tr class="d-flex">
+                <th class="col-2">性別</th>
+                <td class="col-10">@if($inputs["gender"] === '1')
                     男性
                     @elseif($inputs["gender"] === '2')
                     女性
                     @endif</td>
                 <input type="hidden" name="gender" value="{{ $inputs['gender'] }}">
             </tr>
-            <tr>
-                <th style="width:200px">年代</th>
-                <td>@if($inputs["age_id"] === '1')
+            <tr class="d-flex">
+                <th class="col-2">年代</th>
+                <td class="col-10">@if($inputs["age_id"] === '1')
                     10代以下
                     @elseif($inputs["age_id"] === '2')
                     20代
@@ -38,23 +38,23 @@
                     @endif</td>
                 <input type="hidden" name="age_id" value="{{ $inputs['age_id'] }}">
             </tr>
-            <tr>
-                <th style="width:200px">メールアドレス</th>
-                <td>{{ $inputs["email"] }}</td>
+            <tr class="d-flex">
+                <th class="col-2">メールアドレス</th>
+                <td class="col-10">{{ $inputs["email"] }}</td>
                 <input type="hidden" name="email" value="{{ $inputs['email'] }}">
             </tr>
-            <tr>
-                <th style="width:200px">メール送信可否</th>
-                <td>@if($inputs["is_send_email"] === '1')
+            <tr class="d-flex">
+                <th class="col-2">メール送信可否</th>
+                <td class="col-10">@if($inputs["is_send_email"] === '1')
                     送信許可
                     @elseif($inputs["is_send_email"] === '0')
                     送信不可
                     @endif</td>
                 <input type="hidden" name="is_send_email" value="{{ $inputs['is_send_email'] }}">
             </tr>
-            <tr>
-                <th style="width:200px">ご意見</th>
-                <td>{!! nl2br(e($inputs["feedback_text"])) !!}</td>
+            <tr class="d-flex">
+                <th class="col-2">ご意見</th>
+                <td class="col-10">{!! nl2br(e($inputs["feedback_text"])) !!}</td>
                 <input type="hidden" name="feedback_text" value="{{ $inputs['feedback_text'] }}">
             </tr>
         </table>
