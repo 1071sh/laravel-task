@@ -14,7 +14,10 @@ class FrontController extends Controller
     {
         $age = new Age();                                 // Ageモデルのインスタンス化
         $items = $age->getData();                         // データ取得
-        return view('/front/index', ['items' => $items]); // ビューを返す
+        return view(
+            '/front/index',
+            ['items' => $items]
+        );
     }
 
 
@@ -38,16 +41,9 @@ class FrontController extends Controller
         $input = $request->except('action');
         if ($action === 'submit') {
             $user = new Answer;
-            // $user->name = $request->name;
-            // $user->gender = '2';
-            // $user->age_id = '1';
-            // $user->email = 'yamada@yahoo.co.jp';
-            // $user->is_send_email = '1';
-            // $user->feedback_text = '1';
             $input = $request->except('action');
             unset($input['_token']);
             $user->fill($input)->save();
-            // $user->save();
             return view('/front/thanks');
         } else {
             return redirect()->action('FrontController@index')->withInput($request->all);

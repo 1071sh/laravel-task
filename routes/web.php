@@ -27,7 +27,7 @@ Route::get('/system', 'HomeController@index');
 
 // ログイン状態のみアクセス可能
 Route::group(['middleware' => 'auth'], function () {
-    // ユーザ関連
+    // 検索画面
     Route::get('/system/answer/index', 'AnswerController@index');
 
     // 詳細画面
@@ -35,7 +35,4 @@ Route::group(['middleware' => 'auth'], function () {
 
     // 削除機能
     Route::post('/system/answer/index/{id}', 'AnswerController@delete');
-
-    //検索機能
-    // Route::get('paginate', 'SearchController@index')->name('search.index');s
 });

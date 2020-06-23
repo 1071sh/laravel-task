@@ -9,42 +9,44 @@
 @section('content')
 <h1 class="mb-4">アンケート管理システム</h1>
 <div class="border p-5 mb-4">
-    <form>
+    <form action="{{url('/system/answer/index')}}" method="GET">
         <div class="row justify-content-between mb-3">
             <div class="input-block col-sm-7">
                 <div class="form-group row">
                     <label for="name" class="col-sm-3 col-form-label">氏名</label>
                     <div class="col-sm-9">
-                        <input type="text" class="form-control" id="name" placeholder="入力してください">
+                        <input type="text" name="name" value="{{$name}}" class="form-control" id="name" placeholder="入力してください">
                     </div>
                 </div>
                 <div class="form-group row">
-                    <label for="inputState" class="col-sm-3 col-form-label">年代</label>
+                    <label for="age_id" class="col-sm-3 col-form-label">年代</label>
                     <div class="col-sm-9">
-                        <select id="inputState" class="form-control">
-                            <option selected>すべて</option>
-                            <option>10代</option>
-                            <option>20代</option>
-                            <option>30代</option>
+                        <select name="age_id" id="age_id" class="form-control">
+                            <option value="" selected>すべて</option>
+                            <option value="1" @if($age_id=='1' ) selected @endif>10代以下</option>
+                            <option value="2" @if($age_id=='2' ) selected @endif>20代</option>
+                            <option value="3" @if($age_id=='3' ) selected @endif>30代</option>
+                            <option value="4" @if($age_id=='4' ) selected @endif>40代</option>
+                            <option value="5" @if($age_id=='5' ) selected @endif>50代</option>
+                            <option value="6" @if($age_id=='6' ) selected @endif>60代以上</option>
                         </select>
                     </div>
                 </div>
                 <div class="form-group row">
                     <label for="inputEmail3" class="col-sm-3 col-form-label">登録日</label>
                     <div class="col-sm-9 row  align-items-center justify-content-between">
-                        <div class="col-sm-5">
-                            <input type="text" class="flatpickr flatpickr-input form-control" name="date" value="{{ old('date') }}" placeholder="Select Date..">
+                        <div class="col-sm-6">
+                            <input type="date" name="from" value="{{$date}}" class="form-control">
                         </div>
-                        <div class="col-sm-1">〜</div>
-                        <div class="col-sm-5">
-                            <input type="text" class="flatpickr flatpickr-input form-control" name="date" value="{{ old('date') }}" placeholder="Select Date..">
+                        <div class="col-sm-6">
+                            <input type="date" name="until" value="{{$date}}" class="form-control">
                         </div>
                     </div>
                 </div>
                 <div class="form-group row">
-                    <label for="inputEmail3" class="col-sm-3 col-form-label">キーワード</label>
+                    <label for="keyword" class="col-sm-3 col-form-label">キーワード</label>
                     <div class="col-sm-9">
-                        <input type="text" class="form-control" id="inputEmail3" placeholder="キーワードを入力">
+                        <input name="keyword" value="{{$keyword}}" type="text" class="form-control" id="keyword" placeholder="キーワードを入力">
                     </div>
                 </div>
             </div> {{-- input --}}
@@ -54,16 +56,16 @@
                         <legend class="col-form-label col-sm-3 pt-0">性別</legend>
                         <div class="col-sm-9">
                             <div class="form-check form-check-inline">
-                                <input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio1" value="option1" checked>
-                                <label class="form-check-label" for="inlineRadio1">すべて</label>
+                                <input class="form-check-input" type="radio" name="gender" id="gender_all" value="" checked>
+                                <label class="form-check-label" for="gender_all">すべて</label>
                             </div>
                             <div class="form-check form-check-inline">
-                                <input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio2" value="option2">
-                                <label class="form-check-label" for="inlineRadio2">男性</label>
+                                <input class="form-check-input" type="radio" name="gender" id="male" value="1" @if ($gender==1) checked @endif>
+                                <label class="form-check-label" for="male">男性</label>
                             </div>
                             <div class="form-check form-check-inline">
-                                <input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio3" value="option2">
-                                <label class="form-check-label" for="inlineRadio3">女性</label>
+                                <input class="form-check-input" type="radio" name="gender" id="female" value="2" @if ($gender==2) checked @endif>
+                                <label class="form-check-label" for="female">女性</label>
                             </div>
                         </div>
                     </div>
@@ -72,10 +74,9 @@
                     <div class="col-sm-6">メール送信許可</div>
                     <div class="col-sm-6">
                         <div class="form-check">
-                            <input class="form-check-input" type="checkbox" id="gridCheck1">
-                            <label class="form-check-label" for="gridCheck1">
-                                許可のみ
-                            </label>
+                            <input class="form-check-input" type="hidden" name="is_send_email" value="0">
+                            <input class="form-check-input" type="checkbox" name="is_send_email" id="is_send_email" value="1">
+                            <label class="form-check-label" for="is_send_email">許可のみ</label>
                         </div>
                     </div>
                 </div>
@@ -83,61 +84,98 @@
         </div>
         <div class="row justify-content-center">
             <button type="button" class="btn btn-outline-primary mr-3" style="width:100px" id="resetBtn">リセット</button>
-            <button type="button" class="btn btn-success" style="width:100px">検索</button>
+            <input type="submit" class="btn btn-success" style="width:100px" value="検索">
         </div>
     </form>
 </div>
 
 <!-- フラッシュメッセージ -->
 @if (session('flash_message'))
-<div class="flash_message alert alert-primary text-center" role="alert">
+<div class="flash_message alert alert-warning text-center" role="alert">
     {{ session('flash_message') }}
 </div>
 @endif
 
-<button type="button" class="btn btn-danger">選択したアンケートを削除</button>
-<div class="">
-    <span class="mr-3">全{{ $answers->total() }}件中</span>
-    <span class="mr-4">{{$answers->firstItem()}}~{{ $answers->lastItem() }}件</span>
-    {{ $answers->links() }}
-</div>
-
-<table class="table table-hover">
+<form method="post" action="/system/answer/index/{{ $answers['id'] }}">
+    <div class="d-flex justify-content-between mb-4">
+        {{ csrf_field() }}
+        <input type="submit" value="選択したアンケートを削除" class="btn btn-danger" id="btnDelete">
+        <div class="pagi_wrapper">
+            <span class="mr-3">全{{ $answers->total() }}件中</span>
+            <span class="mr-4">{{$answers->firstItem()}}~{{ $answers->lastItem() }}件</span>
+            <div class="paginate d-inline-block">{{ $answers->links() }}</div>
+        </div>
+    </div>
+    <!-- 検索結果を表示 -->
+    @if(count($answers) > 0)
+    <table class="table table-hover" id="boxes">
+        <thead>
+            <tr class="d-flex">
+                <th class="col-1">
+                    <div class="form-check"><label class="form-check-label" for="all"><input class="form-check-input" type="checkbox" name="allChecked" id="all">全選択</label>
+                    </div>
+                </th>
+                <th class="col-1">ID</th>
+                <th class="col-1">氏名</th>
+                <th class="col-1">性別</th>
+                <th class="col-1">年代</th>
+                <th class="col-6">内容</th>
+                <th class="col-1">&nbsp;</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach($answers as $answer)
+            <tr class="d-flex">
+                <td class="col-1">
+                    <div class="form-check">
+                        <label class="form-check-label"><input class="form-check-input" type="checkbox" name="chk[]" value="{{ $answer->id }}">選択</label>
+                    </div>
+                </td>
+                <td class="col-1"><span class="badge badge-pill badge-secondary">{{ $answer->id }}</span></td>
+                <td class="col-1">{{ $answer->name }}</td>
+                <td class="col-1">@if($answer->gender === 1)男性@elseif($answer->gender === 2)女性@endif</td>
+                <td class="col-1">@if($answer->age_id === 1)10代以下
+                    @elseif($answer->age_id === 2)20代
+                    @elseif($answer->age_id === 3)30代
+                    @elseif($answer->age_id === 4)40代
+                    @elseif($answer->age_id === 5)50代
+                    @elseif($answer->age_id === 6)60代以上
+                    @endif</td>
+                <td class="col-6 overflow">{{ $answer->feedback_text }}</td>
+                <td class="col-1"><a class="btn btn-primary rounded-0" href="index/{{ $answer->id }}" role="button">詳細</a></td>
+            </tr>
+            @endforeach
+        </tbody>
+    </table>
+</form>
+{{-- 検索がなかったら --}}
+@else
+<table class="table">
     <thead>
-        <tr>
-            <th><label>
-                    <input type="checkbox" name="all" onClick="AllChecked();" />全選択
-                </label></th>
-            <th>ID</th>
-            <th>氏名</th>
-            <th>性別</th>
-            <th>年代</th>
-            <th colspan="2">内容</th>
+        <tr class="d-flex">
+            <th class="col-1">
+                <div class="form-check"><label class="form-check-label" for="all"><input class="form-check-input" type="checkbox" name="allChecked" id="all">全選択</label>
+                </div>
+            </th>
+            <th class="col-1">ID</th>
+            <th class="col-1">氏名</th>
+            <th class="col-1">性別</th>
+            <th class="col-1">年代</th>
+            <th class="col-6">内容</th>
+            <th class="col-1">&nbsp;</th>
         </tr>
     </thead>
     <tbody>
-        {{-- <div class="alert alert-warning text-center" role="alert">該当するアンケートはありません。</div> --}}
-        @foreach($answers as $answer)
         <tr>
             <td>
-                <div class="form-check">
-                    <input name="test" class="form-check-input delete-check" type="checkbox" value="" id="defaultCheck1">
-                    <label class="form-check-label" for="defaultCheck1">
-                        選択
-                    </label>
-                </div>
+                <div class="alert alert-warning text-center" role="alert">該当するアンケートはありません。</div>
             </td>
-            <td><span class="badge badge-pill badge-secondary">{{ $answer->id }}</span></td>
-            <td>{{ $answer->name }}</td>
-            <td>{{ $answer->gender }}</td>
-            <td>{{ $answer->age_id }}</td>
-            <td class="overflow">{{ $answer->feedback_text }}</td>
-            <td class="text-center"><a class="btn btn-primary rounded-0" href="index/{{ $answer->id }}" role="button">詳細</a></td>
         </tr>
-        @endforeach
     </tbody>
 </table>
+@endif
 @endsection
+
 @section('scripts')
 <script src="https://npmcdn.com/flatpickr/dist/flatpickr.min.js"></script>
 <script src="https://npmcdn.com/flatpickr/dist/l10n/ja.js"></script>
@@ -145,7 +183,6 @@
     flatpickr(('.flatpickr'), {
         locale: 'ja',
         dateFormat: "Y/m/d",
-        minDate: new Date()
     });
 </script>
 @endsection
