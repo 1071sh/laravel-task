@@ -7,7 +7,7 @@ use App\Models\Answer;                 // Answerモデルクラスをuse
 
 class AnswerController extends Controller
 {
-    // 一覧ページ
+    // 一覧
     public function index(Request $request)
     {
         // キーワードを取得
@@ -54,7 +54,17 @@ class AnswerController extends Controller
         ]);
     }
 
-    // 詳細ページ
+    // 一覧(削除)
+    public function delete(Request $request)
+    {
+        foreach ($request->chk as $id) {
+            Answer::find($id)->delete();
+        }
+        // return redirect('system/answer/index')->with('flash_message', '削除しました');
+        return back()->with('flash_message', '削除しました');
+    }
+
+    // 詳細
     public function show($id)
     {
         //レコードを検索
@@ -64,8 +74,8 @@ class AnswerController extends Controller
         return view('system/answer/show', ['answers' => $answers,'url_prev' => $url_prev]);
     }
 
-    // 削除機能
-    public function delete($id)
+    // 詳細(削除)
+    public function deleteDetail($id)
     {
         $answers = Answer::find($id);
         $answers->delete();

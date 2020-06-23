@@ -96,7 +96,7 @@
 </div>
 @endif
 
-<form method="post" action="/system/answer/index/{{ $answers['id'] }}">
+<form method="post" action="/system/answer/index">
     <div class="d-flex justify-content-between mb-4">
         {{ csrf_field() }}
         <input type="submit" value="選択したアンケートを削除" class="btn btn-danger" id="btnDelete">
