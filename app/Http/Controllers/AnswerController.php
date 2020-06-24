@@ -11,13 +11,15 @@ class AnswerController extends Controller
     public function index(Request $request)
     {
         // キーワードを取得
+        $query = Answer::query();
         $name = $request->input('name');
         $gender = $request->input('gender');
         $age_id = $request->input('age_id');
         $is_send_email = $request->input('is_send_email');
         $keyword = $request->input('keyword');
+        $from = $request->input('from');
+        $until = $request->input('until');
         $date = $request->input('date');
-        $query = Answer::query();
 
         // キーワードが入力されていたら
         if (!empty($name)) {
@@ -36,11 +38,12 @@ class AnswerController extends Controller
             $query->where('email', 'LIKE', "%{$keyword}%")
                 ->orWhere('feedback_text', 'LIKE', "%{$keyword}%");
         }
+        if (!empty($request['from']) && !empty($request['until'])) {
+            $query->whereBetween("created_at", [$from, $until]);
+        }
         
-        // ページネーション
-        $answers = $query->paginate(10)
-        ->appends($request->all());  // 検索条件(リクエストのパラメーター）が引き継ぎ
-
+        // 検索条件(リクエストのパラメーター）が引き継ぎ
+        $answers = $query->paginate(10)->appends($request->all());
 
         //取得したデータをviewに渡す
         return view('system/answer/index', [
@@ -60,7 +63,6 @@ class AnswerController extends Controller
         foreach ($request->chk as $id) {
             Answer::find($id)->delete();
         }
-        // return redirect('system/answer/index')->with('flash_message', '削除しました');
         return back()->with('flash_message', '削除しました');
     }
 

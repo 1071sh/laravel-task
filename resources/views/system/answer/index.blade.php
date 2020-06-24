@@ -83,7 +83,7 @@
             </div>{{-- check --}}
         </div>
         <div class="row justify-content-center">
-            <button type="button" class="btn btn-outline-primary mr-3" style="width:100px" id="resetBtn">リセット</button>
+            <a href="{{ url('system/answer/index') }}" role="button" class="btn btn-outline-primary mr-3" style="width:100px">リセット</a>
             <input type="submit" class="btn btn-success" style="width:100px" value="検索">
         </div>
     </form>

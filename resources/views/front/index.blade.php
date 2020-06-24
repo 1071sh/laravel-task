@@ -32,7 +32,7 @@
         <div class="form-group row">
             <label for="age_id" class="col-sm-3 col-form-label">年代 <span class="text-danger">※</span></label>
             <div class="col-sm-9">
-                <select class="form-control my-1　@error('age_id') is-invalid @enderror" name="age_id">
+                <select class="form-control my-1 @error('age_id') is-invalid @enderror" name="age_id">
                     <option value="0" selected>選択してください</option>
                     @foreach($items as $item => $name)
                     <option value="{{ $name->sort }}" @if(old('age_id')==$name->sort) selected @endif>{{ $name->age }}</option>
@@ -57,8 +57,7 @@
             <div class="col-sm-9">
                 <p>登録したメールアドレスにメールマガジンをお送りしてもよろしいですか？</p>
                 <div class="form-check">
-                    <input type="hidden" name="is_send_email" value="0">
-                    <input type="checkbox" name="is_send_email" value="1" class="form-check-input" {{ old('is_send_email') || !$errors->any() ? 'checked' : '' }} id="send_email">
+                    <input type="checkbox" name="is_send_email" value="1" id="send_email" class="form-check-input" {{ is_array(old("is_send_email")) && in_array("1", old("is_send_email"), true)? 'checked="checked"' : '' }}>
                     <label class="form-check-label" for="send_email">送信を許可します</label>
                 </div>
             </div>

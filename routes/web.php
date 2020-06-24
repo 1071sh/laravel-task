@@ -27,13 +27,15 @@ Route::get('/system', 'HomeController@index');
 
 // ログイン状態のみアクセス可能
 Route::group(['middleware' => 'auth'], function () {
-    // 検索画面
+    // 一覧画面
     Route::get('/system/answer/index', 'AnswerController@index');
+
+    // 一覧削除
     Route::post('/system/answer/index', 'AnswerController@delete');
 
     // 詳細画面
     Route::get('/system/answer/index/{id}', 'AnswerController@show');
 
-    // 削除機能
+    // 詳細削除
     Route::post('/system/answer/index/{id}', 'AnswerController@deleteDetail');
 });
