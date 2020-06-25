@@ -4,4 +4,6 @@
     text-overflow: ellipsis;
     -moz-text-overflow: ellipsis;
     -o-text-overflow: ellipsis;
+    max-width: 300px;
+    display: inline-block;
 }

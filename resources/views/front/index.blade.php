@@ -52,13 +52,19 @@
                 @endif
             </div>
         </div>
-        <div class="form-group row align-items-center">
-            <label for="send_email" class="col-sm-3 col-form-label">メール送信可否</label>
+        <div class="form-group row">
+            <label class="col-sm-3 control-labe">メール送信可否</label>
             <div class="col-sm-9">
                 <p>登録したメールアドレスにメールマガジンをお送りしてもよろしいですか？</p>
                 <div class="form-check">
-                    <input type="checkbox" name="is_send_email" value="1" id="send_email" class="form-check-input" {{ is_array(old("is_send_email")) && in_array("1", old("is_send_email"), true)? 'checked="checked"' : '' }}>
-                    <label class="form-check-label" for="send_email">送信を許可します</label>
+                    <input type="hidden" name="is_send_email" value="0">
+                    {{-- <input type="checkbox" name="is_send_email" value="1" id="sendEmail" class="form-check-input"> --}}
+                    @if( old("is_send_email")== '1')
+                    <input type="checkbox" name="is_send_email" value="1" id="sendEmail" class="form-check-input" checked>
+                    @else
+                    <input type="checkbox" name="is_send_email" value="1" id="sendEmail" class="form-check-input">
+                    @endif
+                    <label class="form-check-label" for="sendEmail">送信を許可します</label>
                 </div>
             </div>
         </div>
