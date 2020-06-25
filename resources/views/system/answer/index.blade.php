@@ -36,10 +36,10 @@
                     <label for="inputEmail3" class="col-sm-3 col-form-label">登録日</label>
                     <div class="col-sm-9 row  align-items-center justify-content-between">
                         <div class="col-sm-6">
-                            <input type="date" name="from" value="{{$date}}" class="form-control">
+                            <input type="text" name="from" value="{{ $date }}" class="form-control flatpickr" placeholder="開始日" data-input>
                         </div>
                         <div class="col-sm-6">
-                            <input type="date" name="until" value="{{$date}}" class="form-control">
+                            <input type="text" name="until" value="{{$date}}" class="form-control flatpickr" placeholder="終了日" data-input>
                         </div>
                     </div>
                 </div>
@@ -75,7 +75,7 @@
                     <div class="col-sm-6">
                         <div class="form-check">
                             <input class="form-check-input" type="hidden" name="is_send_email" value="0">
-                            <input class="form-check-input" type="checkbox" name="is_send_email" id="is_send_email" value="1">
+                            <input class="form-check-input" type="checkbox" name="is_send_email" id="is_send_email" value="1" @if ($is_send_email==1) checked @endif>
                             <label class="form-check-label" for="is_send_email">許可のみ</label>
                         </div>
                     </div>
@@ -141,7 +141,7 @@
                     @elseif($answer->age_id === 5)50代
                     @elseif($answer->age_id === 6)60代以上
                     @endif</td>
-                <td class="col-6 overflow">{{ $answer->feedback_text }}</td>
+                <td class="col-6"><span class="overflow">{{ $answer->feedback_text }}</span></td>
                 <td class="col-1"><a class="btn btn-primary rounded-0" href="index/{{ $answer->id }}" role="button">詳細</a></td>
             </tr>
             @endforeach
@@ -182,7 +182,7 @@
 <script>
     flatpickr(('.flatpickr'), {
         locale: 'ja',
-        dateFormat: "Y/m/d",
+        dateFormat: "Y-m-d",
     });
 </script>
 @endsection

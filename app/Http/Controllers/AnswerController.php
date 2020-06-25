@@ -10,7 +10,7 @@ class AnswerController extends Controller
     // 一覧
     public function index(Request $request)
     {
-        // キーワードを取得
+        // 値を取得
         $query = Answer::query();
         $name = $request->input('name');
         $gender = $request->input('gender');
@@ -21,7 +21,7 @@ class AnswerController extends Controller
         $until = $request->input('until');
         $date = $request->input('date');
 
-        // キーワードが入力されていたら
+        // 値が入力されていたら
         if (!empty($name)) {
             $query->where('name', 'LIKE', '%'.$name.'%');
         }
