@@ -21,9 +21,13 @@ Route::post('/confirm', 'FrontController@confirm')->name('confirm');
 Route::post('/thanks', 'FrontController@thanks')->name('thanks');
 
 // 認証
-Auth::routes();
+Auth::routes(['verify' => true]);
 Route::get('/system', 'HomeController@index');
 
+// メールアドレスが確認済みの場合のみアクセス
+Route::get('/welcome', function () {
+    return view('welcome');
+})->middleware('verified');
 
 // ログイン状態のみアクセス可能
 Route::group(['middleware' => 'auth'], function () {
