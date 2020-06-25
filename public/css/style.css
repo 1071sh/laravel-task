@@ -1,9 +1,30 @@
-.overflow {
-    overflow: hidden;
-    white-space: nowrap;
-    text-overflow: ellipsis;
-    -moz-text-overflow: ellipsis;
-    -o-text-overflow: ellipsis;
-    max-width: 300px;
-    display: inline-block;
+.btn-width {
+    max-width: 130px;
+    width: 100%;
+}
+
+.btn-sm-width {
+    max-width: 100px;
+    width: 100%;
+}
+
+@media screen and (min-width: 768px) {
+    .w-md-75 {
+        width: 75%;
+        margin: 0 auto;
+    }
+
+    .btn-width {
+        max-width: 200px;
+    }
+
+    .overflow {
+        overflow: hidden;
+        white-space: nowrap;
+        text-overflow: ellipsis;
+        -moz-text-overflow: ellipsis;
+        -o-text-overflow: ellipsis;
+        max-width: 300px;
+        display: inline-block;
+    }
 }
