@@ -88,14 +88,12 @@
         </div>
     </form>
 </div>
-
-<!-- フラッシュメッセージ -->
+{{-- フラッシュメッセージ --}}
 @if (session('flash_message'))
 <div class="flash_message alert alert-warning text-center" role="alert">
     {{ session('flash_message') }}
 </div>
 @endif
-
 <form method="post" action="/system/answer/index">
     <div class="d-lg-flex justify-content-lg-between mb-4">
         {{ csrf_field() }}
@@ -106,7 +104,7 @@
             <div class="paginate d-inline-block">{{ $answers->links() }}</div>
         </div>
     </div>
-    <!-- 検索結果を表示 -->
+    {{-- 検索結果を表示 --}}
     @if(count($answers) > 0)
     <div class="table-responsive">
         <table class="table table-hover" id="boxes">
@@ -143,47 +141,6 @@
                         @elseif($answer->age_id === 6)60代以上
                         @endif</td>
                     <td class="col-4"><span class="overflow">{{ $answer->feedback_text }}</span></td>
-                    <td class="col-1"><a class="btn btn-primary rounded-0" href="index/{{ $answer->id }}" role="button">詳細</a></td>
-                </tr>
-                @endforeach
-            </tbody>
-        </table>
-    </div>
-    <div class="table-responsive">
-        <table class="table table-hover" id="boxes">
-            <thead>
-                <tr class="d-flex">
-                    <th class="col-1">
-                        <div class="form-check"><label class="form-check-label" for="all"><input class="form-check-input" type="checkbox" name="allChecked" id="all">全選択</label>
-                        </div>
-                    </th>
-                    <th class="col-1">ID</th>
-                    <th class="col-1">氏名</th>
-                    <th class="col-1">性別</th>
-                    <th class="col-1">年代</th>
-                    <th class="col-6">内容</th>
-                    <th class="col-1">&nbsp;</th>
-                </tr>
-            </thead>
-            <tbody>
-                @foreach($answers as $answer)
-                <tr class="d-flex">
-                    <td class="col-1">
-                        <div class="form-check">
-                            <label class="form-check-label"><input class="form-check-input" type="checkbox" name="chk[]" value="{{ $answer->id }}">選択</label>
-                        </div>
-                    </td>
-                    <td class="col-1"><span class="badge badge-pill badge-secondary">{{ $answer->id }}</span></td>
-                    <td class="col-1">{{ $answer->name }}</td>
-                    <td class="col-1">@if($answer->gender === 1)男性@elseif($answer->gender === 2)女性@endif</td>
-                    <td class="col-1">@if($answer->age_id === 1)10代以下
-                        @elseif($answer->age_id === 2)20代
-                        @elseif($answer->age_id === 3)30代
-                        @elseif($answer->age_id === 4)40代
-                        @elseif($answer->age_id === 5)50代
-                        @elseif($answer->age_id === 6)60代以上
-                        @endif</td>
-                    <td class="col-6"><span class="overflow">{{ $answer->feedback_text }}</span></td>
                     <td class="col-1"><a class="btn btn-primary rounded-0" href="index/{{ $answer->id }}" role="button">詳細</a></td>
                 </tr>
                 @endforeach
